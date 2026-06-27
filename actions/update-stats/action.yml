@@ -1,0 +1,68 @@
+name: Update Profile Stats
+description: Generate and commit GitHub profile stats cards as SVG files.
+branding:
+  icon: graph
+  color: gray-dark
+
+inputs:
+  username:
+    description: GitHub username used to generate cards.
+    required: false
+    default: ''
+  stats-path:
+    description: Output path for the stats card.
+    required: false
+    default: profile/stats.svg
+  top-langs-path:
+    description: Output path for the top languages card.
+    required: false
+    default: profile/top-langs.svg
+  streak-path:
+    description: Output path for the streak card.
+    required: false
+    default: profile/streak.svg
+  theme:
+    description: Theme passed to card generators.
+    required: false
+    default: tokyonight
+  commit-message:
+    description: Commit message used when changes are detected.
+    required: false
+    default: 'chore(profile): update stats cards'
+  token:
+    description: GitHub token for authenticated stats generation.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Generate stats card
+      uses: stats-organization/github-readme-stats-action@v2
+      with:
+        card: stats
+        options: username=${{ inputs.username != '' && inputs.username || github.repository_owner }}&show_icons=true&theme=${{ inputs.theme }}&hide_border=true
+        path: ${{ inputs.stats-path }}
+        token: ${{ inputs.token }}
+
+    - name: Generate top languages card
+      uses: stats-organization/github-readme-stats-action@v2
+      with:
+        card: top-langs
+        options: username=${{ inputs.username != '' && inputs.username || github.repository_owner }}&layout=compact&theme=${{ inputs.theme }}&hide_border=true&langs_count=8
+        path: ${{ inputs.top-langs-path }}
+        token: ${{ inputs.token }}
+
+    - name: Download streak card
+      shell: bash
+      run: |
+        curl -sL "https://streak-stats.demolab.com/?user=${{ inputs.username != '' && inputs.username || github.repository_owner }}&theme=${{ inputs.theme }}&hide_border=true" \
+          -o "${{ inputs.streak-path }}"
+
+    - name: Commit and push changes
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add "${{ inputs.stats-path }}" "${{ inputs.top-langs-path }}" "${{ inputs.streak-path }}"
+        git diff --quiet && git diff --staged --quiet || (git commit -m "${{ inputs.commit-message }}" && git push)

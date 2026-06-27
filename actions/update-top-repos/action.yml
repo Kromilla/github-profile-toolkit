@@ -1,0 +1,77 @@
+name: Update Top Repositories
+description: Refresh a marked top repositories table in a GitHub profile README.
+branding:
+  icon: repo
+  color: purple
+
+inputs:
+  readme-path:
+    description: README file to update.
+    required: false
+    default: README.md
+  max-repos:
+    description: Maximum number of repositories to publish.
+    required: false
+    default: '6'
+  exclude-repos:
+    description: Comma-separated list of repositories to exclude.
+    required: false
+    default: ''
+  priority-repos:
+    description: Comma-separated list of repositories to prioritize.
+    required: false
+    default: ''
+  fallback-descriptions:
+    description: JSON object with fallback descriptions keyed by repository name.
+    required: false
+    default: '{}'
+  start-marker:
+    description: Start marker for the repositories section.
+    required: false
+    default: '<!--START_SECTION:top-repos-->'
+  end-marker:
+    description: End marker for the repositories section.
+    required: false
+    default: '<!--END_SECTION:top-repos-->'
+  github-username:
+    description: GitHub username to fetch repositories from.
+    required: false
+    default: ''
+  commit-message:
+    description: Commit message used when changes are detected.
+    required: false
+    default: 'chore(profile): update top repositories'
+  token:
+    description: GitHub token for API requests.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Update top repositories section
+      shell: bash
+      env:
+        README_PATH: ${{ inputs.readme-path }}
+        MAX_REPOS: ${{ inputs.max-repos }}
+        EXCLUDE_REPOS: ${{ inputs.exclude-repos != '' && inputs.exclude-repos || github.repository }}
+        PRIORITY_REPOS: ${{ inputs.priority-repos }}
+        FALLBACK_DESCRIPTIONS: ${{ inputs.fallback-descriptions }}
+        START_MARKER: ${{ inputs.start-marker }}
+        END_MARKER: ${{ inputs.end-marker }}
+        GITHUB_USERNAME: ${{ inputs.github-username != '' && inputs.github-username || github.repository_owner }}
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: node "${{ github.action_path }}/../../scripts/updateTopRepos.js"
+
+    - name: Commit and push changes
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add "${{ inputs.readme-path }}"
+        git diff --quiet && git diff --staged --quiet || (git commit -m "${{ inputs.commit-message }}" && git push)

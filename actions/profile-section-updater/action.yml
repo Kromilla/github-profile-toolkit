@@ -1,0 +1,55 @@
+name: Profile Section Updater
+description: Run a profile updater script and commit README changes when content changes.
+branding:
+  icon: refresh-cw
+  color: green
+
+inputs:
+  script:
+    description: Path to the Node.js updater script inside the repository.
+    required: true
+  node-version:
+    description: Node.js runtime version.
+    required: false
+    default: '20'
+  readme-path:
+    description: README file updated by the script.
+    required: false
+    default: README.md
+  commit-message:
+    description: Commit message used when changes are detected.
+    required: false
+    default: 'chore(profile): update README section'
+  github-username:
+    description: GitHub username used by updater scripts.
+    required: false
+    default: ''
+  token:
+    description: GitHub token for authenticated API requests.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Run updater script
+      shell: bash
+      env:
+        README_PATH: ${{ inputs.readme-path }}
+        GITHUB_USERNAME: ${{ inputs.github-username != '' && inputs.github-username || github.repository_owner }}
+        GITHUB_REPOSITORY_OWNER: ${{ inputs.github-username != '' && inputs.github-username || github.repository_owner }}
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: node ${{ inputs.script }}
+
+    - name: Commit and push changes
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add "${{ inputs.readme-path }}"
+        git diff --quiet && git diff --staged --quiet || (git commit -m "${{ inputs.commit-message }}" && git push)

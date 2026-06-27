@@ -1,0 +1,44 @@
+name: Validate Toolkit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate updater scripts
+        run: npm run validate
+
+      - name: Smoke test section updater
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const { updateReadmeSection } = require('./scripts/lib/readmeSection');
+
+          const readmePath = path.join('examples', 'sample-readme.md');
+          const content = fs.readFileSync(readmePath, 'utf8');
+
+          updateReadmeSection({
+            readmePath,
+            startMarker: '<!--START_SECTION:activity-->',
+            endMarker: '<!--END_SECTION:activity-->',
+            sectionBody: '- Pushed 1 commit to [owner/demo](https://github.com/owner/demo)',
+          });
+
+          const updated = fs.readFileSync(readmePath, 'utf8');
+          if (!updated.includes('owner/demo')) {
+            throw new Error('Section updater smoke test failed.');
+          }
+          EOF

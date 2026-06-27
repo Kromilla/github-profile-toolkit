@@ -1,0 +1,47 @@
+name: Profile README Toolkit
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  activity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update recent activity
+        uses: Kromilla/github-profile-toolkit/actions/update-activity@main
+        with:
+          readme-path: README.md
+          max-events: "5"
+
+  top-repos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update top repositories
+        uses: Kromilla/github-profile-toolkit/actions/update-top-repos@main
+        with:
+          readme-path: README.md
+          max-repos: "6"
+          exclude-repos: ${{ github.repository }}
+          priority-repos: "your-best-repo,another-repo"
+          fallback-descriptions: '{"your-best-repo":"Short description when GitHub has none."}'
+
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update profile stats cards
+        uses: Kromilla/github-profile-toolkit/actions/update-stats@main
+        with:
+          stats-path: profile/stats.svg
+          top-langs-path: profile/top-langs.svg
+          streak-path: profile/streak.svg

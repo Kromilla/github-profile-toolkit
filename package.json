@@ -1,0 +1,24 @@
+{
+  "name": "github-profile-toolkit",
+  "version": "1.0.0",
+  "description": "Reusable GitHub Actions and scripts for dynamic profile README automation.",
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kromilla/github-profile-toolkit.git"
+  },
+  "scripts": {
+    "validate": "node --check scripts/updateActivity.js && node --check scripts/updateTopRepos.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "github",
+    "profile",
+    "readme",
+    "github-actions",
+    "automation"
+  ]
+}
