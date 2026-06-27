@@ -1,0 +1,60 @@
+# Full-Featured Profile Update
+#
+# Runs all four actions in parallel on a daily schedule.
+# Each job checks out independently and commits only if its section changed.
+
+name: Update Profile README (Full)
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-activity:
+    name: Recent Activity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Kromilla/github-profile-toolkit/actions/update-activity@main
+        with:
+          max-events: "5"
+          commit-message: "chore(profile): update recent activity"
+
+  update-top-repos:
+    name: Top Repositories
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Kromilla/github-profile-toolkit/actions/update-top-repos@main
+        with:
+          max-repos: "6"
+          exclude-repos: ${{ github.repository }}
+          priority-repos: "backend-service,bot-platform"
+          commit-message: "chore(profile): update top repositories"
+
+  update-stats:
+    name: Stats Cards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Kromilla/github-profile-toolkit/actions/update-stats@main
+        with:
+          stats-path: profile/stats.svg
+          top-langs-path: profile/top-langs.svg
+          streak-path: profile/streak.svg
+          theme: tokyonight
+          commit-message: "chore(profile): update stats cards"
+
+  custom-section:
+    name: Custom Section
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Kromilla/github-profile-toolkit/actions/profile-section-updater@main
+        with:
+          script: scripts/my-custom-updater.js
+          commit-message: "chore(profile): refresh custom section"

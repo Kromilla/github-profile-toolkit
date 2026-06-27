@@ -1,0 +1,20 @@
+# Minimal Profile Update
+
+# The simplest possible setup — only recent activity, runs daily.
+
+name: Update Profile README
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-activity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Kromilla/github-profile-toolkit/actions/update-activity@main
