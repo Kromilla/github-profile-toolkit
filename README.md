@@ -295,6 +295,7 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
 - 💪 Pushed 1 commit to [Kromilla/analizador-contratos-ia](https://github.com/Kromilla/analizador-contratos-ia)
+- ⭐ Starred [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search)
 <!-- recent-activity:end -->
 
 ---
