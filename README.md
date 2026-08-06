@@ -295,7 +295,6 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
 - 💪 Pushed 1 commit to [Kromilla/clima-plataforma](https://github.com/Kromilla/clima-plataforma)
-- 💪 Pushed 1 commit to [Kromilla/universal-downloader](https://github.com/Kromilla/universal-downloader)
 <!-- recent-activity:end -->
 
 ---
