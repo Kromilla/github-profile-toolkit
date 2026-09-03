@@ -294,7 +294,7 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
-- 🎉 Opened PR in [Kromilla/sismos-global](https://github.com/Kromilla/sismos-global)
+- 💪 Pushed 1 commit to [Kromilla/sismos-global](https://github.com/Kromilla/sismos-global)
 - 💪 Pushed 1 commit to [Kromilla/clima-plataforma](https://github.com/Kromilla/clima-plataforma)
 <!-- recent-activity:end -->
 
