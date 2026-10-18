@@ -294,8 +294,8 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
-- 💪 Pushed 1 commit to [Kromilla/Kromilla](https://github.com/Kromilla/Kromilla)
 - 💪 Pushed 1 commit to [Kromilla/sismos-global](https://github.com/Kromilla/sismos-global)
+- 💪 Pushed 1 commit to [Kromilla/Kromilla](https://github.com/Kromilla/Kromilla)
 - 🔨 Created branch in [Kromilla/solucion-damisela](https://github.com/Kromilla/solucion-damisela)
 <!-- recent-activity:end -->
 
