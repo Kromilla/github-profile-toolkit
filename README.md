@@ -294,8 +294,8 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
-- 🎉 Merged PR in [Kromilla/boxboxcuriosos-media](https://github.com/Kromilla/boxboxcuriosos-media)
-- 💪 Pushed 1 commit to [Kromilla/sismos-global](https://github.com/Kromilla/sismos-global)
+- 💪 Pushed 1 commit to [Kromilla/proyecto-final](https://github.com/Kromilla/proyecto-final)
+- 💪 Pushed 1 commit to [Kromilla/boxboxcuriosos-media](https://github.com/Kromilla/boxboxcuriosos-media)
 <!-- recent-activity:end -->
 
 ---
