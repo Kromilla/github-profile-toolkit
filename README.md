@@ -294,7 +294,7 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
-- 🔨 Created branch in [Kromilla/proyecto-final](https://github.com/Kromilla/proyecto-final)
+- 💪 Pushed 1 commit to [Kromilla/proyecto-final](https://github.com/Kromilla/proyecto-final)
 - 💪 Pushed 1 commit to [Kromilla/boxboxcuriosos-media](https://github.com/Kromilla/boxboxcuriosos-media)
 <!-- recent-activity:end -->
 
