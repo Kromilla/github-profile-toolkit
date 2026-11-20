@@ -294,6 +294,7 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
+- ⭐ Starred [Kromilla/github-profile-toolkit](https://github.com/Kromilla/github-profile-toolkit)
 - 🎉 Merged PR in [Kromilla/boxboxcuriosos-media](https://github.com/Kromilla/boxboxcuriosos-media)
 - 💪 Pushed 1 commit to [Kromilla/proyecto-final](https://github.com/Kromilla/proyecto-final)
 <!-- recent-activity:end -->
