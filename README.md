@@ -294,7 +294,7 @@ Keep changes focused, documented, and consistent with the marker-based update mo
 
 ## Recent Activity (Author)
 <!-- recent-activity:start -->
-- 🎉 Merged PR in [Kromilla/boxboxcuriosos-media](https://github.com/Kromilla/boxboxcuriosos-media)
+- 🔨 Created branch in [Kromilla/boxboxcuriosos-media](https://github.com/Kromilla/boxboxcuriosos-media)
 - 💪 Pushed 1 commit to [Kromilla/practica-2-analisis-numerico](https://github.com/Kromilla/practica-2-analisis-numerico)
 - 🔨 Created branch in [Kromilla/calculadora-jacobi-gauss-seidel](https://github.com/Kromilla/calculadora-jacobi-gauss-seidel)
 - ⭐ Starred [Kromilla/github-profile-toolkit](https://github.com/Kromilla/github-profile-toolkit)
